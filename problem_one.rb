@@ -1,16 +1,21 @@
-class String
-  def total_simularity
-    total = 0
-    (0..length-1).each do |pos|
-      total = total + simularity(self[pos, length-pos])
-    end
-    total
+def simularity(string, suffix)
+  for i in 0..suffix.length
+    break if suffix[i] != string[i]
   end
+  i
+end
 
-  def simularity(suffix)
-    for i in 0..suffix.length
-      break if suffix[i] != self[i]
+File.open('output00.txt', 'w') do |output|
+  File.open("input00.txt") do |input|
+    input.gets # skip first line (= number of test cases)
+    input.each do |line|
+      line.chomp!
+      length = line.length
+      total = 0
+      (0..length-1).each do |pos|
+        total = total + simularity(line, line[pos, length-pos])
+      end
+      output.puts total
     end
-    i
   end
 end
